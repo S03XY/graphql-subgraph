@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+description: BNB Staking Subgraph API
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Staking
+    network: fuji
+    source:
+      address: "0xFd5d1aA89cbc53F2E74eC83FD5D036982073b598"
+      abi: StakingContract
+      startBlock: 4634748
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./mapping/staking.ts
+      entities:
+        - BNBStaked
+      abis:
+        - name: StakingContract
+          file: ./abis/StakingContract.json
+      eventHandlers:
+        - event: STAKED(indexed address,indexed uint256)
+          handler: handleStaking

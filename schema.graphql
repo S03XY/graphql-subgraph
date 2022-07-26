@@ -1,0 +1,5 @@
+type BNBStaked @entity {
+  id: ID!
+  stakerAddress: String! # staker address string
+  amountStaked: BigInt! # staker amount
+}
